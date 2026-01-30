@@ -1,0 +1,66 @@
+TO DO 
+
+
+osobny sync zeby nie wysyłało produktów tylko stany magazynowe 
+dopasowac import zamówien kurierzy  
+
+
+WAZNE 
+V 1.3 
+Wysyła zamowienia do Erli 
+
+V 1.4
+
+W tej wersji wysyła mi produkty do erli 
+Pobiera zamóienia do erli 
+
+V 1.5
+
+Pobiera produkty z erli za pomoca crona 
+wysyła produkty za pomoca crona 
+ 
+TO FIX 
+przyciski wysyłania porduktów i pobierania zamówień wywalają błędy to many request/ array key   ??? brak błędu pobiera wszystko 
+
+V 1.5.1 
+
+Poprawa zamowieni pobieranych do prestashop/ pobiera kwote z erli z nadwyrzką od kurierów do poprawy aby nadpłaconą kwote traktowało jako dostawę 
+
+V 1.5.2 
+
+Dodany ajax do przycisków w panelu presty zanówienia/prodkty aby z BO Z tych katalogoów mozna było wysyłać produkt z nie z wtyczki 
+
+V 1.5.3 
+ Pobiera kategorie z erli, można przypisać kategorię do presty i wysyłac do erli 
+
+V1.5.4 
+
+poprawki wysyłanie produktu ean 
+
+V.1.5.5 
+
+Poprawione wysyłanie zdjęć/ zdjęcia z serwera wysyłają sie na erli 
+
+V 2.0 
+
+Synchronizacja produktów do ERLI
+-wysyła produkty z PrestaShop do ERLI,
+-jeśli produkt ma kombinacje (warianty) → wysyła każdy wariant jako osobny produkt (unikalne externalId),
+-tworzy na ERLI grupy wariantowe (externalVariantGroup + externalAttributes),
+-wysyła ceny, stany magazynowe, SKU/EAN, kategorie oraz zdjęcia.
+
+Import zamówień z ERLI do PrestaShop
+-pobiera inbox zdarzeń z ERLI,
+-tworzy nowe zamówienia w PrestaShop,
+-poprawnie mapuje produkty zamówione jako warianty (np. ps-1-3) i dodaje je do koszyka jako kombinacje,
+-nie tworzy duplikatów zamówień (sprawdza linkowanie w bazie).
+
+
+V 2.3 
+Dodane mapowanie przewoźnika do wysyłania do erli  
+
+V2.4 
+
+Wysyłanie pakietów produktów do erli oraz pobieranie ich z erli 
+
+Wysyłanie tylko aktywnych produktów w prestashop 

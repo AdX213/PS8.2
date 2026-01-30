@@ -1,0 +1,66 @@
+# ERLI Integration V 2.0. – PrestaShop 1.7–9
+
+Moduł do integracji **PrestaShop 1.7–9** z marketplace **ERLI** (Shop API).  
+Umożliwia wysyłanie produktów (w tym wariantów/kombinacji jako grupy wariantowe) oraz pobieranie zamówień z ERLI do PrestaShop.
+
+---
+
+##  Funkcje modułu
+
+### 1) Synchronizacja produktów do ERLI
+- wysyła produkty z PrestaShop do ERLI przez Shop API,
+- obsługuje produkty proste, produkty z kombinacjami (warianty) Oraz Pakiety produtków z PS ,
+- warianty są wysyłane jako **osobne produkty w ERLI** z unikalnym `externalId`,
+- automatycznie tworzy **grupy wariantowe** na ERLI (`externalVariantGroup` + `externalAttributes`),
+- wysyła:
+  - nazwę, opis,
+  - cenę (w groszach),
+  - stan magazynowy,
+  - SKU oraz EAN,
+  - dispatchTime,
+  - wagę,
+  - zdjęcia (wymagane przez ERLI),
+  - kategorie (na podstawie mapowania PS → ERLI),
+  - wtyczka wywyła "Pakiety produktów ze PS -> ERLI) 
+
+### 2) Import zamówień z ERLI do PrestaShop
+- pobiera zdarzenia z `/inbox`,
+- tworzy w PrestaShop **tylko nowe zamówienia** (bez duplikowania),
+- poprawnie mapuje produkty wariantowe z ERLI (`externalId` np. `ps-1-3`) na kombinacje w PrestaShop,
+- tworzy koszyk, dodaje produkty i generuje zamówienie w PrestaShop,
+- zapisuje powiązanie zamówienia ERLI ↔ Presta w bazie.
+- w order sync pobiera i tworzy kurierów, dopisuje ich do zamówienia 
+- aktaulizuje statusy zamowien, jeżeli nie opłacone to przy kolejnej próbie pobrania sprawdza i zmienia status jeżeli opłacone
+---
+
+##  Obsługa wariantów (grup wariantowych)
+
+Jeśli produkt ma kombinacje w PrestaShop (np. rozmiar/kolor), moduł:
+- wysyła każdy wariant jako osobny produkt do ERLI,
+- każdy wariant ma:
+  - unikalny `externalId` w formacie:
+    - `ps-<id_product>-<id_product_attribute>`
+    - np. `ps-12-101`
+  - `externalAttributes` (np. Rozmiar, Kolor),
+  - wspólne `externalVariantGroup.id` równe ID produktu z PrestaShop.
+
+Dzięki temu ERLI grupuje oferty jako warianty jednego produktu.
+
+---
+## Obłsuga pakietów (prosuktów w pakiecie
+Wtyczka wysyła pakiety produtów na erli w postaci jednego produktu 
+- pakiet składający sie z kilku produktów zostaje wysyłany do erli jako jeden produkt, 
+- wtyczka automatycznie dodaje kod html do opisu produktu 
+- pobiera jako produkt z erli do ps i tam presta ustala pozostałe wartości stanów magazynowych itd 
+- 
+
+##  Wymagania
+
+- PrestaShop **1.7 – 9.x**
+- aktywne i poprawnie dostępne z internetu obrazki produktów (ERLI wymaga `images`)
+- konto ERLI + klucz API do Shop API
+
+---
+
+## Projekt wykonany przez 
+Adrian 
