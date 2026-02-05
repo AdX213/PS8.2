@@ -183,14 +183,13 @@ class ProductMapper
             'dispatchTime' => [
                 'period' => $dispatchPeriodDays,
             ],
-            'packaging' => [
-                'weight' => $weightGrams,
-            ],
+            'weight' => $weightGrams,
             'images' => $images,
         ];
 
-        if (!empty($shippingTags)) {
-            $payload['packaging']['tags'] = $shippingTags;
+        // deliveryPriceList zamiast przestarzałego packaging.tags
+        if (!empty($shippingTags) && isset($shippingTags[0])) {
+            $payload['deliveryPriceList'] = (string) $shippingTags[0];
         }
 
         if (!empty($categories)) {

@@ -217,6 +217,13 @@ class AdminErliIntegrationController extends ModuleAdminController
         //     $base = 'https://' . substr($base, 7);
         // }
 
+        //protokół URL do bieżącego żądania (HTTPS / HTTP / localhost)
+        $base = preg_replace(
+            '#^https?://#i',
+            (Tools::usingSecureMode() ? 'https://' : 'http://'),
+            $base
+        );
+
         // dołóż ajax=1 z uwzględnieniem ?/&
         if (strpos($base, '?') === false) {
             $ajaxBase = $base . '?ajax=1';

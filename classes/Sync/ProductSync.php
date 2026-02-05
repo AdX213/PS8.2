@@ -664,22 +664,11 @@ class ProductSync
     }
 
     /**
-     * Dokleja do payloadu sekcję "packaging.tags" z tagiem cennika dostaw ERLI.
-     * Nie nadpisuje innych pól packaging poza "tags".
+     * Zwraca payload bez zmian.
+     * Mapowanie dostaw (packaging.tags) jest już obsługiwane w ProductMapper.
      */
     private function addShippingToPayload(array $payload)
     {
-        $tag = $this->getErliShippingTag();
-        if ($tag === null) {
-            return $payload;
-        }
-
-        if (!isset($payload['packaging']) || !is_array($payload['packaging'])) {
-            $payload['packaging'] = [];
-        }
-
-        $payload['packaging']['tags'] = [(string) $tag];
-
         return $payload;
     }
 }

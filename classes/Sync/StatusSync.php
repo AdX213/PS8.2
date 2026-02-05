@@ -5,11 +5,7 @@ if (!defined('_PS_VERSION_')) {
 }
 
 require_once _PS_MODULE_DIR_ . 'erliintegration/classes/Api/ErliOrderApi.php';
-//
-// DO POPRAWY 
-//
-//
-//
+
 class StatusSync
 {
     const CURSOR_KEY = 'ERLI_STATUS_CURSOR_ID';
